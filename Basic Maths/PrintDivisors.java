@@ -37,5 +37,6 @@ public class PrintDivisors {
         }
 
         System.out.println("Divisors : " + divisors);
+        sc.close();
     }
 }

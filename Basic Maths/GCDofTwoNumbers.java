@@ -42,5 +42,6 @@ public class GCDofTwoNumbers {
             a = temp;
         }
         System.out.println("GCD : " + a);
+        sc.close();
     }
 }

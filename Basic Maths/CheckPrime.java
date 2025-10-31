@@ -43,5 +43,6 @@ public class CheckPrime {
             }
         }
         System.out.println("Result: " + isPrime);
+        sc.close();
     }
 }

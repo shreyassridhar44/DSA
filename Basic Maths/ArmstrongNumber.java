@@ -50,5 +50,6 @@ public class ArmstrongNumber {
         }
 
         System.out.println("Result: " + (sum == n));
+    
     }
 }

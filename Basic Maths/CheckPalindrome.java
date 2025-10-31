@@ -39,5 +39,6 @@ public class CheckPalindrome {
         // x == reversedHalf (even number of digits)
         // OR x == reversedHalf / 10 (odd number of digits -> middle digit ignored)
         System.out.println(x == reversedHalf || x == reversedHalf / 10);
+        sc.close();
     }
 }
