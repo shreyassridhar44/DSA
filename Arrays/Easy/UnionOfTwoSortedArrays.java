@@ -1,6 +1,6 @@
 import java.util.*;
 
-class UnionOfTwoSortedArrays {
+class Solution {
     // Function to find union of two sorted arrays using two pointers
     public List<Integer> findUnion(int[] arr1, int[] arr2, int n, int m) {
         // List to store union elements
@@ -52,7 +52,7 @@ class UnionOfTwoSortedArrays {
     }
 }
 
-public class Main {
+public class UnionOfTwoSortedArrays {
     public static void main(String[] args) {
         int[] arr1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         int[] arr2 = {2, 3, 4, 4, 5, 11, 12};
