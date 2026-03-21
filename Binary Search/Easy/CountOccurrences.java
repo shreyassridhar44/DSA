@@ -1,63 +1,59 @@
 /*
-LeetCode 34: Find First and Last Position of Element in Sorted Array
+Problem: Count Occurrences in Sorted Array
 
-Problem:
-Given a sorted array nums, find the starting and ending position of a target value.
+Using the logic of finding first and last occurrence.
 
-If target is not found, return [-1, -1].
+Count = lastIndex - firstIndex + 1
 
-You must achieve O(log n) time complexity.
+If element not found → return 0
 
 Example:
-Input: nums = [5,7,7,8,8,10], target = 8
-Output: [3,4]
+Input: arr = [1,2,2,2,3,4], x = 2
+Output: 3
 */
 
-import java.util.Arrays;
-
-public class FindFirstAndLastPosition {
+public class CountOccurrences {
 
     // ---------------------------------------------------
     // Brute Force Approach
-    // Linear scan
     // Time Complexity: O(n)
     // Space Complexity: O(1)
     // ---------------------------------------------------
-    public static int[] bruteForce(int[] nums, int target) {
+    public static int bruteForce(int[] nums, int target) {
 
-        int first = -1;
-        int last = -1;
+        int count = 0;
 
-        for (int i = 0; i < nums.length; i++) {
-
-            if (nums[i] == target) {
-
-                if (first == -1) {
-                    first = i;
-                }
-
-                last = i;
+        for (int num : nums) {
+            if (num == target) {
+                count++;
             }
         }
 
-        return new int[]{first, last};
+        return count;
     }
 
 
     // ---------------------------------------------------
-    // Optimal Approach
-    // Binary Search twice (clean separation)
+    // Optimal Approach (Using your logic)
     // Time Complexity: O(log n)
     // Space Complexity: O(1)
     // ---------------------------------------------------
-    public static int[] optimalApproach(int[] nums, int target) {
+    public static int optimalApproach(int[] nums, int target) {
 
         int first = findFirst(nums, target);
+
+        // element not found
+        if (first == -1) {
+            return 0;
+        }
+
         int last = findLast(nums, target);
 
-        return new int[]{first, last};
+        return last - first + 1;
     }
 
+
+    // Find First Occurrence
     private static int findFirst(int[] nums, int target) {
 
         int left = 0, right = nums.length - 1;
@@ -80,6 +76,8 @@ public class FindFirstAndLastPosition {
         return ans;
     }
 
+
+    // Find Last Occurrence
     private static int findLast(int[] nums, int target) {
 
         int left = 0, right = nums.length - 1;
@@ -108,10 +106,10 @@ public class FindFirstAndLastPosition {
     // ---------------------------------------------------
     public static void main(String[] args) {
 
-        int[] nums = {5, 7, 7, 8, 8, 10};
-        int target = 8;
+        int[] nums = {1, 2, 2, 2, 3, 4};
+        int target = 2;
 
-        System.out.println("Brute Force: " + Arrays.toString(bruteForce(nums, target)));
-        System.out.println("Optimal Approach: " + Arrays.toString(optimalApproach(nums, target)));
+        System.out.println("Brute Force: " + bruteForce(nums, target));
+        System.out.println("Optimal Approach: " + optimalApproach(nums, target));
     }
 }
