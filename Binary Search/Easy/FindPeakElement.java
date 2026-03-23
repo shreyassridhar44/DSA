@@ -1,41 +1,81 @@
-// 162. Find Peak Element
-// Find any peak element using O(log n) binary search.
+/*
+LeetCode 162: Find Peak Element
 
-import java.util.*;
+Problem:
+A peak element is strictly greater than its neighbors.
+
+Return index of any peak element.
+
+Constraints:
+Time Complexity must be O(log n)
+
+Example:
+Input: [1,2,3,1]
+Output: 2
+*/
 
 public class FindPeakElement {
 
-    // Time Complexity: O(log n)
+    // ---------------------------------------------------
+    // Brute Force Approach
+    // Check every element
+    // Time Complexity: O(n)
     // Space Complexity: O(1)
-    public static int findPeakElement(int[] nums) {
-        int left = 0, right = nums.length - 1;
+    // ---------------------------------------------------
+    public static int bruteForce(int[] nums) {
 
-        while (left < right) {
-            int mid = left + (right - left) / 2;
+        int n = nums.length;
 
-            // If we are in an ascending slope, move right
-            if (nums[mid] < nums[mid + 1]) {
-                left = mid + 1;
-            }
-            // Otherwise, peak is left (mid might be the peak)
-            else {
-                right = mid;
+        for (int i = 0; i < n; i++) {
+
+            boolean left = (i == 0) || (nums[i] > nums[i - 1]);
+            boolean right = (i == n - 1) || (nums[i] > nums[i + 1]);
+
+            if (left && right) {
+                return i;
             }
         }
 
-        return left; // OR right (both same)
+        return -1;
     }
 
-    // MAIN (Handles user input)
+
+    // ---------------------------------------------------
+    // Optimal Approach
+    // Binary Search (slope-based)
+    // Time Complexity: O(log n)
+    // Space Complexity: O(1)
+    // ---------------------------------------------------
+    public static int optimalApproach(int[] nums) {
+
+        int low = 0;
+        int high = nums.length - 1;
+
+        while (low < high) {
+
+            int mid = low + (high - low) / 2;
+
+            if (nums[mid] < nums[mid + 1]) {
+                // increasing slope → peak on right
+                low = mid + 1;
+            } else {
+                // decreasing slope → peak on left (including mid)
+                high = mid;
+            }
+        }
+
+        return low; // or high (both same)
+    }
+
+
+    // ---------------------------------------------------
+    // Main Method (Driver Code)
+    // ---------------------------------------------------
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
-        int n = sc.nextInt();
-        int[] nums = new int[n];
+        int[] nums = {1, 2, 3, 1};
 
-        for (int i = 0; i < n; i++)
-            nums[i] = sc.nextInt();
-
-        System.out.println(findPeakElement(nums));
+        System.out.println("Brute Force: " + bruteForce(nums));
+        System.out.println("Optimal Approach: " + optimalApproach(nums));
     }
 }
