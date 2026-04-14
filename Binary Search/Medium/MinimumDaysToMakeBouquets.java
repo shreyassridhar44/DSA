@@ -77,17 +77,18 @@ public class MinimumDaysToMakeBouquets {
         int count = 0;
         int bouquets = 0;
 
-        for (int b : bloomDay) {
-
-            if (b <= day) {
-                count++; // flower bloomed
-            } else {
-                bouquets += count / k;
-                count = 0;
+        for(int bloom : bloomDay){
+            if(bloom<=day){
+                count++;
+                if(count==k){
+                    bouquets++;
+                    count=0;
+                }
             }
+            else{
+                count=0;
+            }  
         }
-
-        bouquets += count / k; // last segment
 
         return bouquets >= m;
     }
